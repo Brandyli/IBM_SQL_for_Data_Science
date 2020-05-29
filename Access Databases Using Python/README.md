@@ -1,4 +1,4 @@
-## Create credentials to access your database instance
+## Create Db2 Service Credentials
 * port is the database port
 * db is the database name
 * host is the hostname of the database instance
