@@ -10,3 +10,11 @@
 ## Connecting to a database instance
 
 This will demonstrate how to create a database connection to an instance of IBM Db2 on Cloud. You will be using Jupyter notebooks to complete the labs.
+
+## Creating tables, loading data and querying data
+
+This Lab will demonstrate how to create tables in a database, insert some rows of data into the table, invoke SQL queries, and retrieve the query result set. 
+
+## Accessing Databases with SQL magic
+
+You will create a table, insert some data, and retrieve the results using SQL magic.
