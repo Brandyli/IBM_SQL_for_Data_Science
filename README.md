@@ -15,7 +15,7 @@ This notebook illustrates how to access your database instance using Python by f
 1. Retrieve the result set into a pandas dataframe
 1. Close the database connection
 
-## Sub-queries, Multiple Tables.sql
+## Employee Queries Using Sub-queries in Cross-Tab
 --1 Sub-queries
 --1A Retrieve the list of employees who earn more than the average salary
 --1B Sub-queires in FROM clause
@@ -44,7 +44,7 @@ SELECT E.EMP_ID, D.DEP_NAME
 FROM employees E, departments D 
 WHERE E.DEP_ID=D.DEPT_ID_DEP;
 ```
-## PETSALE_FUNCTIONS.sql
+## PetSale Queires using Built-In Functions
 --1 Aggregation: SUM(), AVG()
 ```
 SELECT SUM(SALEPRICE) AS "SUM_OF_SALEPRICE", AVG(SALEPRICE) FROM PETSALE 
