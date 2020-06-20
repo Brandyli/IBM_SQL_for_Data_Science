@@ -9,11 +9,11 @@ This notebook illustrates how to access your database instance using Python by f
 1. Import the ibm_db Python library
 1. Identify and enter the database connection credentials
 1. Create the database connection
-Create a table
-Insert data into the table
-Query data from the table
-Retrieve the result set into a pandas dataframe
-Close the database connection
+1. Create a table
+1. Insert data into the table
+1. Query data from the table
+1. Retrieve the result set into a pandas dataframe
+1. Close the database connection
 ### Analyze Socioeconomic Dataset of Chicago with SQL and Python.ipynb
 In this project, we analyze Chicago Socioeconomic Dataset in an IBM Db2 database on IBM Cloud instance.
 
@@ -60,3 +60,53 @@ income_vs_hardship = %sql select per_capita_income_, hardship_index from chicago
 plot = sns.jointplot(x = "per_capita_income_", y = "hardship_index", data = income_vs_hardship.DataFrame())
 ```
 ![image](https://user-images.githubusercontent.com/46945617/85189605-73fff880-b27e-11ea-8cc7-dd73b710ff33.png)
+
+
+### Final Project - Analysis of Three Chicago Datasets in Socioeconomic Indicators,Public Schools and Crime.
+
+#### 1. Find the total number of crimes recorded in the CRIME table
+
+```
+# Rows in Crime table
+%sql select count(*) from crime
+```
+#### 2. Retrieve first 10 rows from the CRIME table
+```
+%sql select * from crime limit 10
+```
+#### 3. How many crimes involve an arrest?
+```
+%sql select count(*) from crime where arrest = 'TRUE'
+```
+#### 4. Which unique types of crimes have been recorded at GAS STATION locations?
+```
+%sql select distinct(primary_type) from crime where location_description = 'GAS STATION'
+```
+#### 5. In the CENNUS_DATA table list all Community Areas whose names start with the letter ‘B’.
+```
+%sql select community_area_name from census_data where community_area_name like 'B%'
+```
+#### 6. Which schools in Community Areas 10 to 15 are healthy school certified?
+```
+%sql select name_of_school from chicago_public_schools \
+where community_area_number between 10 and 15 and \
+healthy_school_certified = 'Yes'
+```
+#### 7. What is the average school Safety Score?
+```
+%sql select avg(safety_score) from chicago_public_schools
+```
+#### 8. List the top 5 Community Areas by average College Enrollment [number of students]
+```
+%sql select avg(safety_score) from chicago_public_schools
+```
+#### 9. Use a sub-query to determine which Community Area has the least value for school Safety Score?
+```
+%sql select community_area_name,community_area_number, name_of_school, safety_score from chicago_public_schools\
+where safety_score = (select min(safety_score) from chicago_public_schools)
+```
+#### 10. [Without using an explicit JOIN operator] Find the Per Capita Income of the Community Area which has a school Safety Score of 1
+```
+%sql select community_area_name,community_area_number, name_of_school, safety_score from chicago_public_schools\
+where safety_score = (select min(safety_score) from chicago_public_schools)
+```
