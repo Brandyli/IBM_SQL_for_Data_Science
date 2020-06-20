@@ -44,7 +44,39 @@ SELECT E.EMP_ID, D.DEP_NAME
 FROM employees E, departments D 
 WHERE E.DEP_ID=D.DEPT_ID_DEP;
 ```
-
+## PETSALE_FUNCTIONS.sql
+--1 Aggregation: SUM(), AVG()
+```
+SELECT SUM(SALEPRICE) AS "SUM_OF_SALEPRICE", AVG(SALEPRICE) FROM PETSALE 
+WHERE QUANTITY > 1 OR ANIMAL = 'Dog' GROUP BY SALEDATE ORDER BY  SALEDATE DESC;
+```
+--2 Aggregation: MAX(), MIN()
+```
+SELECT MAX(SALEDATE), MIN(SALEDATE) FROM PETSALE;
+```
+--3 Scaler and string function: ROUND(), LENGTH(), LCASE(), UCASE()
+```
+SELECT ROUND(SALEPRICE), LENGTH(ANIMAL) FROM PETSALE WHERE LCASE(ANIMAL) = 'cat' OR UCASE(ANIMAL)  = 'dog';
+```
+--4 Date, time functions: YEAR(), MONTH(), DAY(), DAYOFMONTH(), DAYOFWEEK()
+-- DAYOFYEAR(), WEEK(), HOUR(), MINUTE(), SECOND()
+--4A Extract the DAY and YEAR portion from a date
+```
+SELECT DAY(SALEDATE), YEAR(SALEDATE) FROM PETSALE;
+```
+--4B Get the number of sales during the month of May
+```
+SELECT SALEPRICE FROM PETSALE WHERE MONTH(SALEDATE) = '05';
+```
+--4C What date is it 3 days after each sale date?
+```
+SELECT (SALEDATE +3) FROM PETSALE;
+```
+--5 Special registers: CURRENT_DATE, CURRENT_TIME
+--5A: How many days have passed since each SALEDATE till now?
+```
+SELECT (CURRENT_DATE - SALEDATE), CURRENT_TIME FROM PETSALE;
+```
 ## Three Projects 
 ### I Working with Chicago Public School level performance using SQL and Python.ipynb
 #### 1.The SCHOOLS table contains a large number of columns. How many columns does this table have?
