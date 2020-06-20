@@ -3,7 +3,17 @@ WHAT YOU WILL LEARN
 * Write basic SQL statements: CREATE, DROP, SELECT, INSERT, UPDATE, DELETE  
 * Filter, sort, group results, use built-in functions, access multiple tables  
 * Access databases from Jupyter using Python and work with real world datasets
+### Access DB2 on Cloud using Python
+This notebook illustrates how to access your database instance using Python by following the steps below:
 
+1. Import the ibm_db Python library
+1. Identify and enter the database connection credentials
+1. Create the database connection
+Create a table
+Insert data into the table
+Query data from the table
+Retrieve the result set into a pandas dataframe
+Close the database connection
 ### Analyze Socioeconomic Dataset of Chicago with SQL and Python.ipynb
 In this project, we analyze Chicago Socioeconomic Dataset in an IBM Db2 database on IBM Cloud instance.
 
