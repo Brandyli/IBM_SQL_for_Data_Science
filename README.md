@@ -14,7 +14,7 @@ This notebook illustrates how to access your database instance using Python by f
 1. Query data from the table
 1. Retrieve the result set into a pandas dataframe
 1. Close the database connection
-## Three Project 
+## Three Projects 
 ### I Working with Chicago Public School level performance using SQL and Python.ipynb
 #### 1.The SCHOOLS table contains a large number of columns. How many columns does this table have?
 ```
