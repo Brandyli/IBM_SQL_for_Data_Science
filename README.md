@@ -133,7 +133,7 @@ len(chicago_socioeconomic_data)
 ```
 %sql select community_area_name from chicago_socioeconomic_data where per_capita_income_ > 60000;
 ```
-## Python
+### Python
 
 #### 6. Create a scatter plot using the variables per_capita_income_ and hardship_index. Explain the correlation between the two variables.
 
