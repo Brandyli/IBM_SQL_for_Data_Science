@@ -3,7 +3,7 @@ WHAT YOU WILL LEARN
 * Write basic SQL statements: CREATE, DROP, SELECT, INSERT, UPDATE, DELETE  
 * Filter, sort, group results, use built-in functions, access multiple tables  
 * Access databases from Jupyter using Python and work with real world datasets
-### Access DB2 on Cloud using Python
+## Access DB2 on Cloud using Python
 This notebook illustrates how to access your database instance using Python by following the steps below:
 
 1. Import the ibm_db Python library
@@ -14,7 +14,97 @@ This notebook illustrates how to access your database instance using Python by f
 1. Query data from the table
 1. Retrieve the result set into a pandas dataframe
 1. Close the database connection
-### Analyze Socioeconomic Dataset of Chicago with SQL and Python.ipynb
+## Three Project 
+### I Working with Chicago Public School level performance using SQL and Python.ipynb
+#### 1.The SCHOOLS table contains a large number of columns. How many columns does this table have?
+```
+To obtain the column names query syscat.column - tabname
+%sql select count(*) from SYSCAT.COLUMNS where TABNAME = 'SCHOOLS'
+```
+#### 2. What is the list of columns in SCHOOLS table and their column type (datatype) and length?
+```
+To obtain sepcific column properties - tbname
+# Method 1
+%sql select distinct(NAME), coltype, length from sysibm.syscolumns where tbname = 'SCHOOLS' limit 5
+# Method 2
+%sql select colname,typename, length from SYSCAT.COLUMNS where TABNAME = 'SCHOOLS' limit 5
+```
+#### 3. How many Elementary Schools are in the dataset?
+```
+%sql select count(*) from SCHOOLS where "Elementary, Middle, or High School" = 'ES'
+```
+#### 4. What is the highest Safety Score?
+```
+%sql select max(safety_score) as highest_safety_score from SCHOOLS
+```
+#### 5.Which schools have highest Safety Score?
+```
+%sql select max(safety_score) as highest_safety_score from SCHOOLS
+```
+
+#### 6. What are the top 10 schools with the highest "Average Student Attendance"?
+```
+%sql select name_of_school, average_student_attendance from SCHOOLS \
+    order by average_student_attendance desc nulls last limit 10
+```
+#### 7. Retrieve the list of 5 Schools with the lowest Average Student Attendance sorted in ascending order based on 
+```
+# Method 1
+%sql select name_of_school,average_student_attendance from SCHOOLS \
+order by average_student_attendance nulls last limit 5
+
+# Method 2
+%sql SELECT Name_of_School, Average_Student_Attendance  \
+     from SCHOOLS \
+     order by Average_Student_Attendance \
+     fetch first 5 rows only
+```
+#### 8. Now remove the '%' sign from the above result set for Average Student Attendance column
+```
+%sql select name_of_school,replace(average_student_attendance, '%', '') \
+from SCHOOLS \
+order by average_student_attendance nulls last limit 5
+```
+#### 9. Which Schools have Average Student Attendance lower than 70%?
+```
+%sql select name_of_school from SCHOOLS where decimal(replace(average_student_attendance, '%', '')) < 70 \
+order by average_student_attendance
+```
+#### 10.Get the total College Enrollment for each Community Area
+```
+%sql select community_area_name, sum(college_enrollment) as total_enrollment from SCHOOLS \
+group by community_area_name order by total_enrollment desc limit 10
+```
+#### 11. Get the 5 Community Areas with the least total College Enrollment sorted in ascending order
+```
+# Method 1
+%sql select community_area_name, sum(college_enrollment) as total_enrollment from SCHOOLS \
+group by community_area_name order by total_enrollment nulls last limit 5
+
+# Method 2
+%sql select Community_Area_Name, sum(College_Enrollment) AS TOTAL_ENROLLMENT \
+   from SCHOOLS \
+   group by Community_Area_Name \
+   order by TOTAL_ENROLLMENT asc \
+   fetch first 5 rows only
+```
+### two tables
+#### 12. Get the hardship index for the community area which has College Enrollment of 4638
+```
+%%sql 
+select hardship_index 
+   from chicago_socioeconomic_data C, schools S 
+   where C.ca = S.community_area_number 
+      and college_enrollment = 4368
+```
+#### 13.Get the hardship index for the community area which has the highest value for College Enrollment
+```
+%%sql 
+select hardship_index 
+   from chicago_socioeconomic_data  
+   where ca in (select community_area_number from schools order by college_enrollment desc limit 1)
+```
+### II Analyzing Socioeconomic Dataset of Chicago with SQL and Python.ipynb
 In this project, we analyze Chicago Socioeconomic Dataset in an IBM Db2 database on IBM Cloud instance.
 
 ### SQL
@@ -62,7 +152,7 @@ plot = sns.jointplot(x = "per_capita_income_", y = "hardship_index", data = inco
 ![image](https://user-images.githubusercontent.com/46945617/85189605-73fff880-b27e-11ea-8cc7-dd73b710ff33.png)
 
 
-### Final Project - Analysis of Three Chicago Datasets in Socioeconomic Indicators,Public Schools and Crime.
+### III Analysis of Three Chicago Datasets in Socioeconomic Indicators,Public Schools and Crime.
 
 #### 1. Find the total number of crimes recorded in the CRIME table
 
